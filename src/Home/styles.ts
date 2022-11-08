@@ -48,7 +48,7 @@ text-align: center;
 export const SellerContainer = styled.View`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-top: 35px;
   border-radius: 20px;
 `;
@@ -106,27 +106,25 @@ export const ComponentTitle = styled.Text`
 export const TotalContainer = styled.View`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
   margin-bottom: 100px;
   margin-top: 60px;
+  background-color: #1C1C1E;
+  border-radius: 15px;
+  width: 100%;
 `
 
 export const TotalValueText = styled.Text`
-  color: #fff;
-  font-family: "Inter-Black";
-  font-size: 28px;
-  background-color: #1C1C1E;
-  padding: 20px 20px;
-  width: 55%;
-  border-radius: 15px;
-  margin-left: 25px;
-  
-`
-
-export const TextCurrency = styled.Text`
   color: #707070;
   font-family: "Inter-Bold";
+  font-size: 28px;
+  margin-left: 20px;
+`
+
+export const TextValue = styled.Text`
+  color: #fff;
+  font-family: "Inter-Black";
 `
 
 export const FinishButton = styled.TouchableOpacity`
@@ -134,8 +132,6 @@ export const FinishButton = styled.TouchableOpacity`
   padding: 20px 40px;
   background-color: #55FF9E;
   border-radius: 15px;
-  left: -25px;
-  
 `
 
 export const TextFinish = styled.Text`

@@ -1,6 +1,6 @@
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { ComponentContainer, ComponentsContainer, ComponentTitle, Container, CounterContainer, FinishButton, ItensContainer, Number, SafeArea, SellerButton, SellerButtonContainer, SellerContainer, SellerItem, TextButton, TextCurrency, TextFinish, Title, TotalContainer, TotalValueText } from "./styles";
+import { ComponentContainer, ComponentsContainer, ComponentTitle, Container, CounterContainer, FinishButton, ItensContainer, Number, SafeArea, SellerButton, SellerButtonContainer, SellerContainer, SellerItem, TextButton, TextFinish, TextValue, Title, TotalContainer, TotalValueText } from "./styles";
 
 export default function Home() {
   const fulltuningTypes = ["Sem Full Tuning", "LV3 - Sem Blindagem", "LV3 - Com Blindagem", "LV4 - Sem Blindagem", "LV4 - Com Blindagem"]
@@ -202,7 +202,7 @@ export default function Home() {
         </ComponentsContainer>
 
         <TotalContainer>
-          <TotalValueText><TextCurrency>$  </TextCurrency>154000</TotalValueText>
+          <TotalValueText>$  <TextValue>154000</TextValue></TotalValueText>
           <FinishButton><TextFinish>FINALIZAR</TextFinish></FinishButton>
         </TotalContainer>
       </SafeArea>
