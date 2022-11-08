@@ -119,7 +119,8 @@ export const TotalValueText = styled.Text`
   color: #707070;
   font-family: "Inter-Bold";
   font-size: 28px;
-  margin-left: 20px;
+  width: 50%;
+  text-align: center;
 `
 
 export const TextValue = styled.Text`

@@ -202,7 +202,7 @@ export default function Home() {
         </ComponentsContainer>
 
         <TotalContainer>
-          <TotalValueText>$  <TextValue>154000</TextValue></TotalValueText>
+          <TotalValueText>$  <TextValue>154.000</TextValue></TotalValueText>
           <FinishButton><TextFinish>FINALIZAR</TextFinish></FinishButton>
         </TotalContainer>
       </SafeArea>
