@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { ComponentContainer, ComponentsContainer, ComponentTitle, Container, CounterContainer, FinishButton, ItensContainer, Number, SafeArea, SellerButton, SellerButtonContainer, SellerContainer, SellerItem, TextButton, TextFinish, TextValue, Title, TotalContainer, TotalValueText } from "./styles";
@@ -15,6 +15,7 @@ export default function Home() {
   const [selledKits, setSelledKits] = useState(0)
   const [selledPneus, setSelledPneus] = useState(0)
 
+  const [isPartner, setIsPartner] = useState(false)
   const [countKits, setCountKits] = useState(0)
   const [countPneus, setCountPneus] = useState(0)
 
@@ -27,6 +28,36 @@ export default function Home() {
   const [priceTurbo, setPriceTurbo] = useState(0)
 
   const [totalPrice, setTotalPrice] = useState(0)
+
+  useEffect(() => {
+    let costPerKit = isPartner ? 2000 : 2500
+    let costPerPneu = isPartner ? 500 : 600
+
+    let costKits = costPerKit * countKits
+    let costPneus = costPerPneu * countPneus
+
+    let totalCost = costKits + costPneus
+
+    if (priceFullTuning != 0) {
+      totalCost = totalCost + priceFullTuning
+    } else {
+      totalCost = totalCost + priceTransmission + priceSuspension + priceEngine + priceBrake + priceShield + priceTurbo
+    }
+
+    setTotalPrice(totalCost)
+  },
+    [
+      countKits,
+      countPneus,
+      priceFullTuning,
+      priceTransmission,
+      priceSuspension,
+      priceEngine,
+      priceBrake,
+      priceShield,
+      priceTurbo
+    ]
+  )
 
   function decreaseKits() {
     if (countKits > 0) {
