@@ -59,6 +59,14 @@ export default function Home() {
     ]
   )
 
+  function onFinished() {
+    setSelledKits((selledKits) => selledKits + countKits)
+    setSelledPneus((selledPneus) => selledPneus + countPneus)
+
+    setCountKits(0)
+    setCountPneus(0)
+  }
+
   function decreaseKits() {
     if (countKits > 0) {
       setCountKits((countKits) => countKits - 1)
@@ -457,7 +465,7 @@ export default function Home() {
 
         <TotalContainer>
           <TotalValueText>$  <TextValue>{totalPrice}</TextValue></TotalValueText>
-          <FinishButton><TextFinish>FINALIZAR</TextFinish></FinishButton>
+          <FinishButton onPress={onFinished}><TextFinish>FINALIZAR</TextFinish></FinishButton>
         </TotalContainer>
       </SafeArea>
     </Container>
