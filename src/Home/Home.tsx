@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { ComponentContainer, ComponentsContainer, ComponentTitle, Container, CounterContainer, FinishButton, ItensContainer, Number, SafeArea, SellerButton, SellerButtonContainer, SellerContainer, SellerItem, TextButton, TextFinish, TextValue, Title, TotalContainer, TotalValueText } from "./styles";
@@ -9,6 +10,33 @@ export default function Home() {
   const engineTypes = ["Nível 0", "Nível 1", "Nível 2", "Nível 3", "Nível 4"]
   const brakeTypes = ["Nível 0", "Nível 1", "Nível 2", "Nível 3", "Nível 4"]
   const turboTypes = ["Não", "Sim"]
+
+  const [selledKits, setSelledKits] = useState(0)
+  const [selledPneus, setSelledPneus] = useState(0)
+
+  const [countKits, setCountKits] = useState(0)
+  const [countPneus, setCountPneus] = useState(0)
+
+  function decreaseKits() {
+    if (countKits > 0) {
+      setCountKits((countKits) => countKits - 1)
+    }
+  }
+
+  function increaseKits() {
+    setCountKits((countKits) => countKits + 1)
+  }
+
+  function decreasePneus() {
+    if (countPneus > 0) {
+      setCountPneus((countPneus) => countPneus - 1)
+    }
+  }
+
+  function increasePneus() {
+    setCountPneus((countPneus) => countPneus + 1)
+  }
+
 
   const buttonSelectStyles = {
     backgroundColor: "#222224",
@@ -25,11 +53,11 @@ export default function Home() {
       <SafeArea>
         <CounterContainer>
           <ItensContainer>
-            <Number>15</Number>
+            <Number>{selledKits}</Number>
             <Title>KITS</Title>
           </ItensContainer>
           <ItensContainer>
-            <Number>28</Number>
+            <Number>{selledPneus}</Number>
             <Title>PNEUS</Title>
           </ItensContainer>
         </CounterContainer>
@@ -37,19 +65,19 @@ export default function Home() {
         <SellerContainer>
           <SellerItem>
             <Title>KIT</Title>
-            <Number>0</Number>
+            <Number>{countKits}</Number>
             <SellerButtonContainer>
-              <SellerButton><TextButton>-</TextButton></SellerButton>
-              <SellerButton><TextButton>+</TextButton></SellerButton>
+              <SellerButton onPress={decreaseKits}><TextButton>-</TextButton></SellerButton>
+              <SellerButton onPress={increaseKits}><TextButton>+</TextButton></SellerButton>
             </SellerButtonContainer>
           </SellerItem>
 
           <SellerItem>
             <Title>PNEU</Title>
-            <Number>0</Number>
+            <Number>{countPneus}</Number>
             <SellerButtonContainer>
-              <SellerButton><TextButton>-</TextButton></SellerButton>
-              <SellerButton><TextButton>+</TextButton></SellerButton>
+              <SellerButton onPress={decreasePneus}><TextButton>-</TextButton></SellerButton>
+              <SellerButton onPress={increasePneus}><TextButton>+</TextButton></SellerButton>
             </SellerButtonContainer>
           </SellerItem>
         </SellerContainer>

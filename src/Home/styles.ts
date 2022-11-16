@@ -68,7 +68,6 @@ export const SellerButtonContainer = styled.View`
   align-items: center;
 `
 export const SellerButton = styled.TouchableOpacity`
-  
   background-color: #1C1C1E;
   width: 50px;
   height: 50px;
