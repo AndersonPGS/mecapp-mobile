@@ -465,7 +465,7 @@ export default function Home() {
 
         <TotalContainer>
           <TotalValueText>$  <TextValue>{totalPrice}</TextValue></TotalValueText>
-          <FinishButton onPress={onFinished}><TextFinish>Finalizar</TextFinish></FinishButton>
+          <FinishButton onPress={onFinished}><TextFinish>FINALIZAR</TextFinish></FinishButton>
         </TotalContainer>
       </SafeArea>
     </Container>
