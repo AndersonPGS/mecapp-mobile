@@ -1,4 +1,4 @@
-import { Button, Center, HStack, Text } from "native-base";
+import { Button, Center, HStack, Select, Text, VStack } from "native-base";
 import React, { useEffect, useState } from "react";
 
 export default function Home() {
@@ -16,6 +16,14 @@ export default function Home() {
   const [isPartner, setIsPartner] = useState(false)
   const [countKits, setCountKits] = useState(0)
   const [countPneus, setCountPneus] = useState(0)
+
+  const [valueFullTuning, setValueFullTuning] = useState("0")
+  const [valueTransmission, setValueTransmission] = useState("0")
+  const [valueSuspension, setValueSuspension] = useState("0")
+  const [valueEngine, setValueEngine] = useState("0")
+  const [valueBrake, setValueBrake] = useState("0")
+  const [valueShield, setValueShield] = useState("0")
+  const [valueTurbo, setValueTurbo] = useState("0")
 
   const [priceFullTuning, setPriceFullTuning] = useState(0)
   const [priceTransmission, setPriceTransmission] = useState(0)
@@ -248,7 +256,7 @@ export default function Home() {
 
   return (
     <Center w="full" bg="black" safeArea>
-      <HStack minW="300" w="90%" maxW="full" my={5} p={5} bg="gray.900" rounded="2xl">
+      <HStack minW="300" w="90%" my={5} p={5} bg="gray.900" rounded="2xl">
         <Center height="130" m={4} flex={.5}>
           <Text fontSize="100" fontFamily="inter" color="white" w="full" textAlign="center" bold>{selledKits}</Text>
           <Text fontSize="30" fontFamily="inter" color="gray.400" w="full" textAlign="center">KITS</Text>
@@ -259,7 +267,7 @@ export default function Home() {
         </Center>
       </HStack>
 
-      <HStack minW="300" w="90%" maxW="full" my={5}>
+      <HStack minW="300" w="90%" my={5}>
         <Center m={4} py={4} px={8} flex={.5} bg="gray.900" rounded="2xl">
           <Text fontSize="25" fontFamily="inter" fontWeight="400" color="gray.400" textAlign="center" w="full">KIT</Text>
           <Text fontSize="70" fontFamily="inter" color="white" textAlign="center" w="full" bold>{countKits}</Text>
@@ -279,33 +287,36 @@ export default function Home() {
         </Center>
       </HStack>
 
-      {/* <ComponentsContainer>
-          <ComponentContainer>
-            <ComponentTitle>Full Tuning</ComponentTitle>
-            <Select
-              // selectedValue={service}
-              data={fulltuningTypes}
-              defaultValueByIndex={0}
-              buttonStyle={buttonSelectStyles}
-              buttonTextStyle={buttonSelectTextStyles}
-              rowStyle={buttonSelectStyles}
-              rowTextStyle={buttonSelectTextStyles}
-              renderDropdownIcon={isOpened => {
-                return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
-              }}
-              onSelect={(selectedItem, index) => {
-                selectionFullTuning(index)
-              }}
-              buttonTextAfterSelection={(selectedItem) => {
-                return selectedItem
-              }}
-              rowTextForSelection={(item, index) => {
-                return item
-              }}
-            />
-          </ComponentContainer>
+      <VStack space={5} width="90%">
+        <Center>
+          <Text fontFamily="inter" fontSize={24} color="white" width="95%">Full Tuning</Text>
+          <Select
+            selectedValue={valueFullTuning}
+            minW="100%"
+            mt={1}
+            h={12}
+            rounded="xl"
+            color="white"
+            borderColor="gray.700"
+            fontSize={20}
+            placeholderTextColor="gray.400"
+            accessibilityLabel="Selecione uma opção de tunagem"
+            placeholder="Selecione uma opção"
+            onValueChange={itemValue => setValueFullTuning(itemValue)}
+            _selectedItem={{
+              bg: "green.400",
+              rounded: 15
+            }}
+          >
+            <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Sem Full Tuning" value="0" />
+            <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV3 - Sem Blindagem" value="1" />
+            <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV3 - Com Blindagem" value="2" />
+            <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV4 - Sem Blindagem" value="3" />
+            <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV4 - Com Blindagem" value="4" />
+          </Select>
+        </Center>
 
-          <ComponentContainer>
+        {/* <ComponentContainer>
             <ComponentTitle>Transmissão</ComponentTitle>
             <Select
               data={transmissionTypes}
@@ -447,15 +458,15 @@ export default function Home() {
                 return item
               }}
             />
-          </ComponentContainer>
+          </ComponentContainer> */}
 
-        </ComponentsContainer> */}
+      </VStack >
 
       {/* <TotalContainer>
           <TotalValueText>$  <TextValue>{totalPrice}</TextValue></TotalValueText>
           <FinishButton onPress={onFinished}><TextFinish>FINALIZAR</TextFinish></FinishButton>
         </TotalContainer> */}
-    </Center>
+    </Center >
   );
 }
 
