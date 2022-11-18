@@ -327,6 +327,7 @@ export default function Home() {
 
         {/* SELECTS FROM PERFORMANCE */}
         <VStack space={5} width="90%">
+          {/* FULL TUNING */}
           <Center>
             <Text fontFamily="inter" fontSize={24} color="white" width="95%">Full Tuning</Text>
             <Select
@@ -355,6 +356,7 @@ export default function Home() {
             </Select>
           </Center>
 
+          {/* TRANSMISSION */}
           <Center>
             <Text fontFamily="inter" fontSize={24} color="white" width="95%">Transmissão</Text>
             <Select
@@ -384,6 +386,7 @@ export default function Home() {
             </Select>
           </Center>
 
+          {/* SUSPENSION */}
           <Center>
             <Text fontFamily="inter" fontSize={24} color="white" width="95%">Suspensão</Text>
             <Select
@@ -413,6 +416,7 @@ export default function Home() {
             </Select>
           </Center>
 
+          {/* ENGINE */}
           <Center>
             <Text fontFamily="inter" fontSize={24} color="white" width="95%">Motor</Text>
             <Select
@@ -442,6 +446,7 @@ export default function Home() {
             </Select>
           </Center>
 
+          {/* BRAKE */}
           <Center>
             <Text fontFamily="inter" fontSize={24} color="white" width="95%">Freio</Text>
             <Select
@@ -471,6 +476,7 @@ export default function Home() {
             </Select>
           </Center>
 
+          {/* SHIELD */}
           <Center>
             <Text fontFamily="inter" fontSize={24} color="white" width="95%">Blindagem</Text>
             <Select
@@ -501,6 +507,7 @@ export default function Home() {
             </Select>
           </Center>
 
+          {/* TURBO */}
           <Center>
             <Text fontFamily="inter" fontSize={24} color="white" width="95%">Turbo</Text>
             <Select
