@@ -104,21 +104,77 @@ export default function Home() {
         //Level 3 - Sem Blindagem
         setPriceFullTuning(127000)
         setValueFullTuning(value)
+
+        //Set all selection default
+        setPriceTransmission(0)
+        setValueTransmission("0")
+        setPriceSuspension(0)
+        setValueSuspension("0")
+        setPriceEngine(0)
+        setValueEngine("0")
+        setPriceBrake(0)
+        setValueBrake("0")
+        setPriceShield(0)
+        setValueShield("0")
+        setPriceTurbo(0)
+        setValueTurbo("0")
         break;
       case "2":
         //Level 3 - Com Blindagem
         setPriceFullTuning(215000)
         setValueFullTuning(value)
+
+        //Set all selection default
+        setPriceTransmission(0)
+        setValueTransmission("0")
+        setPriceSuspension(0)
+        setValueSuspension("0")
+        setPriceEngine(0)
+        setValueEngine("0")
+        setPriceBrake(0)
+        setValueBrake("0")
+        setPriceShield(0)
+        setValueShield("0")
+        setPriceTurbo(0)
+        setValueTurbo("0")
         break;
       case "3":
         //Level 4 - Sem Blindagem
         setPriceFullTuning(160000)
         setValueFullTuning(value)
+
+        //Set all selection default
+        setPriceTransmission(0)
+        setValueTransmission("0")
+        setPriceSuspension(0)
+        setValueSuspension("0")
+        setPriceEngine(0)
+        setValueEngine("0")
+        setPriceBrake(0)
+        setValueBrake("0")
+        setPriceShield(0)
+        setValueShield("0")
+        setPriceTurbo(0)
+        setValueTurbo("0")
         break;
       case "4":
         //Level 4 - Com Blindagem
         setPriceFullTuning(247000)
         setValueFullTuning(value)
+
+        //Set all selection default
+        setPriceTransmission(0)
+        setValueTransmission("0")
+        setPriceSuspension(0)
+        setValueSuspension("0")
+        setPriceEngine(0)
+        setValueEngine("0")
+        setPriceBrake(0)
+        setValueBrake("0")
+        setPriceShield(0)
+        setValueShield("0")
+        setPriceTurbo(0)
+        setValueTurbo("0")
     }
   }
 
