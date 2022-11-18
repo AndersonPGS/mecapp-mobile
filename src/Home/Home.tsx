@@ -1,15 +1,7 @@
-import { Button, Center, HStack, ScrollView, Select, Text, VStack } from "native-base";
+import { Button, Center, HStack, ScrollView, Select, Switch, Text, VStack } from "native-base";
 import React, { useEffect, useState } from "react";
 
 export default function Home() {
-  const fulltuningTypes = ["Sem Full Tuning", "LV3 - Sem Blindagem", "LV3 - Com Blindagem", "LV4 - Sem Blindagem", "LV4 - Com Blindagem"]
-  const transmissionTypes = ["Nível 0", "Nível 1", "Nível 2", "Nível 3", "Nível 4"]
-  const suspensionTypes = ["Nível 0", "Nível 1", "Nível 2", "Nível 3", "Nível 4"]
-  const engineTypes = ["Nível 0", "Nível 1", "Nível 2", "Nível 3", "Nível 4"]
-  const brakeTypes = ["Nível 0", "Nível 1", "Nível 2", "Nível 3", "Nível 4"]
-  const shieldTypes = ["Nível 0", "Nível 1", "Nível 2", "Nível 3", "Nível 4", "Nível 5"]
-  const turboTypes = ["Não", "Sim"]
-
   const [selledKits, setSelledKits] = useState(0)
   const [selledPneus, setSelledPneus] = useState(0)
 
@@ -55,6 +47,7 @@ export default function Home() {
     [
       countKits,
       countPneus,
+      isPartner,
       priceFullTuning,
       priceTransmission,
       priceSuspension,
@@ -91,6 +84,16 @@ export default function Home() {
 
   function increasePneus() {
     setCountPneus((countPneus) => countPneus + 1)
+  }
+
+  function changeIsPartner(value: boolean) {
+    if (value) {
+      setIsPartner(true)
+    } else {
+      setIsPartner(false)
+    }
+
+    console.log(isPartner)
   }
 
   function selectionFullTuning(value: string) {
@@ -361,7 +364,8 @@ export default function Home() {
         </HStack>
 
         {/* KITS AND PNEUS TO SELL */}
-        <HStack minW="300" w="90%" my={5}>
+        <Text w="full" mt={7} textAlign="center" color="gray.400" fontSize={24} fontFamily="inter" bold>KITS & PNEUS</Text>
+        <HStack minW="300" w="90%">
           <Center m={4} py={4} px={8} flex={.5} bg="gray.900" rounded="2xl">
             <Text fontSize="25" fontFamily="inter" fontWeight="400" color="gray.400" textAlign="center" w="full">KIT</Text>
             <Text fontSize="70" fontFamily="inter" color="white" textAlign="center" w="full" bold>{countKits}</Text>
@@ -380,8 +384,13 @@ export default function Home() {
             </HStack>
           </Center>
         </HStack>
+        <HStack w="80%" alignItems="center" justifyContent="space-between">
+          <Text textAlign="center" color="white" fontSize={24} fontFamily="inter">Parceria</Text>
+          <Switch size="md" onToggle={(state) => changeIsPartner(state)} />
+        </HStack>
 
         {/* SELECTS FROM PERFORMANCE */}
+        <Text w="full" mt={7} textAlign="center" color="gray.400" fontSize={24} fontFamily="inter" bold>PERFORMANCE</Text>
         <VStack space={5} width="90%">
           {/* FULL TUNING */}
           <Center>
@@ -592,12 +601,183 @@ export default function Home() {
 
         </VStack >
 
-        {/* <TotalContainer>
-          <TotalValueText>$  <TextValue>{totalPrice}</TextValue></TotalValueText>
-          <FinishButton onPress={onFinished}><TextFinish>FINALIZAR</TextFinish></FinishButton>
-        </TotalContainer> */}
-      </Center >
-    </ScrollView>
+        {/* SWITCHS FROM APPEARANCE */}
+        <Text w="full" mt={7} mb={2} textAlign="center" color="gray.400" fontSize={24} fontFamily="inter" bold>APARÊNCIA</Text>
+        <VStack space={2} w="90%">
+
+          {/* SPOILER */}
+          <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+              Aerofólio
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Spoiler</Text>
+            </Text>
+            <Switch size="md" />
+          </HStack>
+
+          {/* FRONT BUMPER */}
+          <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+              Parachoque Diant.
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Front Bumper</Text>
+            </Text>
+            <Switch size="md" />
+          </HStack>
+
+          {/* REAR BUMPER */}
+          <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+              Parachoque Tras.
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Rear Bumper</Text>
+            </Text>
+            <Switch size="md" />
+          </HStack>
+
+          {/* SIDE SKIRT */}
+          <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+              Saia Lateral
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Side Skirt</Text>
+            </Text>
+            <Switch size="md" />
+          </HStack>
+
+          {/* EXHAUST */}
+          <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+              Escapamento
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Exhaust</Text>
+            </Text>
+            <Switch size="md" />
+          </HStack>
+
+          {/* ROOLCAGE */}
+          <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+              Gaiola de Prot.
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Rollcage</Text>
+            </Text>
+            <Switch size="md" />
+          </HStack>
+
+          {/* ROOF */}
+          <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+              Capô
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Roof</Text>
+            </Text>
+            <Switch size="md" />
+          </HStack>
+
+          {/* HOOD */}
+          <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+              Teto
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Hood</Text>
+            </Text>
+            <Switch size="md" />
+          </HStack>
+
+          {/* WINDOW TINT */}
+          <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+              Vidro Fumê
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Window Tint</Text>
+            </Text>
+            <Switch size="md" />
+          </HStack>
+
+          {/* NEONS */}
+          <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+              Neons
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Neons</Text>
+            </Text>
+            <Switch size="md" />
+          </HStack>
+
+          {/* XENON */}
+          <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+              Xenôn
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Xenon</Text>
+            </Text>
+            <Switch size="md" />
+          </HStack>
+
+          {/* WHEELS */}
+          <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+              Roda
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Wheels</Text>
+            </Text>
+            <Switch size="md" />
+          </HStack>
+
+          {/* PLATE INDEX */}
+          <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+              Placa
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Plate Index</Text>
+            </Text>
+            <Switch size="md" />
+          </HStack>
+
+          {/* PAINT*/}
+          <VStack bg="gray.900" py="2" px="1" pl="4" rounded="lg">
+            <Text color="white" fontSize={24} fontFamily="inter" bold>
+              Pinturas
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Respray</Text>
+            </Text>
+
+            <HStack alignItems="center" justifyContent="space-between">
+              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
+                Primária
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Primary</Text>
+              </Text>
+              <Switch size="md" />
+            </HStack>
+
+            <HStack alignItems="center" justifyContent="space-between">
+              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
+                Secundária
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Secondary</Text>
+              </Text>
+              <Switch size="md" />
+            </HStack>
+
+            <HStack alignItems="center" justifyContent="space-between">
+              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
+                Perolado
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Pearlyment</Text>
+              </Text>
+              <Switch size="md" />
+            </HStack>
+
+            <HStack alignItems="center" justifyContent="space-between">
+              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
+                Cor da roda
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Wheels Color</Text>
+              </Text>
+              <Switch size="md" />
+            </HStack>
+
+          </VStack>
+
+        </VStack>
+
+        {/* SUM AND FINISH */}
+        <HStack w="90%" mt={7} mb={2} bg="gray.900" rounded="lg" alignItems="center">
+          <Text w="50%" color="gray.400" fontFamily="inter" fontSize={30} pl={4}>$ <Text color="white" fontFamily="inter" bold>{totalPrice}</Text></Text>
+          <Button w="50%" h="20" colorScheme="green" rounded="lg" onPress={onFinished} _text={{
+            minW: "100%",
+            textAlign: "center",
+            fontSize: 28,
+            fontFamily: "inter",
+            fontWeight: "800"
+          }}>FINALIZAR</Button>
+        </HStack>
+      </Center>
+    </ScrollView >
   );
 }
 
