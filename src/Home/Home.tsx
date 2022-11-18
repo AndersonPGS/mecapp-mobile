@@ -1,4 +1,4 @@
-import { Button, Center, HStack, Select, Text, VStack } from "native-base";
+import { Button, Center, HStack, ScrollView, Select, Text, VStack } from "native-base";
 import React, { useEffect, useState } from "react";
 
 export default function Home() {
@@ -93,380 +93,448 @@ export default function Home() {
     setCountPneus((countPneus) => countPneus + 1)
   }
 
-  function selectionFullTuning(type: number) {
-    switch (type) {
-      case 0:
+  function selectionFullTuning(value: string) {
+    switch (value) {
+      case "0":
         //Sem Full Tuning
         setPriceFullTuning(0)
+        setValueFullTuning(value)
         break;
-      case 1:
+      case "1":
         //Level 3 - Sem Blindagem
         setPriceFullTuning(127000)
+        setValueFullTuning(value)
         break;
-      case 2:
+      case "2":
         //Level 3 - Com Blindagem
         setPriceFullTuning(215000)
+        setValueFullTuning(value)
         break;
-      case 3:
+      case "3":
         //Level 4 - Sem Blindagem
         setPriceFullTuning(160000)
+        setValueFullTuning(value)
         break;
-      case 4:
+      case "4":
         //Level 4 - Com Blindagem
         setPriceFullTuning(247000)
+        setValueFullTuning(value)
     }
   }
 
-  function selectionTransmission(type: number) {
-    switch (type) {
-      case 0:
+  function selectionTransmission(value: string) {
+    switch (value) {
+      case "0":
         //Level 0
         setPriceTransmission(0)
+        setValueTransmission(value)
         break;
-      case 1:
+      case "1":
         //Level 1
         setPriceTransmission(15000)
+        setValueTransmission(value)
         break;
-      case 2:
+      case "2":
         //Level 2
         setPriceTransmission(21000)
+        setValueTransmission(value)
         break;
-      case 3:
+      case "3":
         //Level 3
         setPriceTransmission(28000)
+        setValueTransmission(value)
         break;
-      case 4:
+      case "4":
         //Level 4
         setPriceTransmission(36000)
+        setValueTransmission(value)
     }
   }
 
-  function selectionSuspension(type: number) {
-    switch (type) {
-      case 0:
+  function selectionSuspension(value: string) {
+    switch (value) {
+      case "0":
         //Level 0
         setPriceSuspension(0)
+        setValueSuspension(value)
         break;
-      case 1:
+      case "1":
         //Level 1
         setPriceSuspension(15000)
+        setValueSuspension(value)
         break;
-      case 2:
+      case "2":
         //Level 2
         setPriceSuspension(21000)
+        setValueSuspension(value)
         break;
-      case 3:
+      case "3":
         //Level 3
         setPriceSuspension(28000)
+        setValueSuspension(value)
         break;
-      case 4:
+      case "4":
         //Level 4
         setPriceSuspension(36000)
+        setValueSuspension(value)
     }
   }
 
-  function selectionEngine(type: number) {
-    switch (type) {
-      case 0:
+  function selectionEngine(value: string) {
+    switch (value) {
+      case "0":
         //Level 0
         setPriceEngine(0)
+        setValueEngine(value)
         break;
-      case 1:
+      case "1":
         //Level 1
         setPriceEngine(15000)
+        setValueEngine(value)
         break;
-      case 2:
+      case "2":
         //Level 2
         setPriceEngine(21000)
+        setValueEngine(value)
         break;
-      case 3:
+      case "3":
         //Level 3
         setPriceEngine(28000)
+        setValueEngine(value)
         break;
-      case 4:
+      case "4":
         //Level 4
         setPriceEngine(37000)
+        setValueEngine(value)
     }
   }
 
-  function selectionBrake(type: number) {
-    switch (type) {
-      case 0:
+  function selectionBrake(value: string) {
+    switch (value) {
+      case "0":
         //Level 0
         setPriceBrake(0)
+        setValueBrake(value)
         break;
-      case 1:
+      case "1":
         //Level 1
         setPriceBrake(15000)
+        setValueBrake(value)
         break;
-      case 2:
+      case "2":
         //Level 2
         setPriceBrake(21000)
+        setValueBrake(value)
         break;
-      case 3:
+      case "3":
         //Level 3
         setPriceBrake(28000)
+        setValueBrake(value)
         break;
-      case 4:
+      case "4":
         //Level 4
         setPriceBrake(36000)
+        setValueBrake(value)
     }
   }
 
-  function selectionShield(type: number) {
-    switch (type) {
-      case 0:
+  function selectionShield(value: string) {
+    switch (value) {
+      case "0":
         //Level 0
         setPriceShield(0)
+        setValueShield(value)
         break;
-      case 1:
+      case "1":
         //Level 1
         setPriceShield(28000)
+        setValueShield(value)
         break;
-      case 2:
+      case "2":
         //Level 2
         setPriceShield(43000)
+        setValueShield(value)
         break;
-      case 3:
+      case "3":
         //Level 3
         setPriceShield(58000)
+        setValueShield(value)
         break;
-      case 4:
+      case "4":
         //Level 4
         setPriceShield(73000)
+        setValueShield(value)
         break;
-      case 5:
+      case "5":
         //Level 4
         setPriceShield(88000)
+        setValueShield(value)
     }
   }
 
-  function selectionTurbo(type: number) {
-    switch (type) {
-      case 0:
+  function selectionTurbo(value: string) {
+    switch (value) {
+      case "0":
         //Sem Turbo
         setPriceTurbo(0)
+        setValueTurbo(value)
         break;
-      case 1:
+      case "1":
         //Com Turbo
         setPriceTurbo(15000)
+        setValueTurbo(value)
     }
   }
 
 
   return (
-    <Center w="full" bg="black" safeArea>
-      <HStack minW="300" w="90%" my={5} p={5} bg="gray.900" rounded="2xl">
-        <Center height="130" m={4} flex={.5}>
-          <Text fontSize="100" fontFamily="inter" color="white" w="full" textAlign="center" bold>{selledKits}</Text>
-          <Text fontSize="30" fontFamily="inter" color="gray.400" w="full" textAlign="center">KITS</Text>
-        </Center>
-        <Center height="130" m={4} flex={.5}>
-          <Text fontSize="100" fontFamily="inter" color="white" w="full" textAlign="center" bold >{selledPneus}</Text>
-          <Text fontSize="30" fontFamily="inter" color="gray.400" w="full" textAlign="center">PNEUS</Text>
-        </Center>
-      </HStack>
 
-      <HStack minW="300" w="90%" my={5}>
-        <Center m={4} py={4} px={8} flex={.5} bg="gray.900" rounded="2xl">
-          <Text fontSize="25" fontFamily="inter" fontWeight="400" color="gray.400" textAlign="center" w="full">KIT</Text>
-          <Text fontSize="70" fontFamily="inter" color="white" textAlign="center" w="full" bold>{countKits}</Text>
-          <HStack space="30%">
-            <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={decreaseKits}>-</Button>
-            <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={increaseKits}>+</Button>
-          </HStack>
-        </Center>
+    <ScrollView w="100%">
+      <Center w="full" bg="black" safeArea>
 
-        <Center m={4} py={4} px={8} flex={.5} bg="gray.900" rounded="2xl">
-          <Text fontSize="25" fontFamily="inter" fontWeight="400" color="gray.400" textAlign="center" w="full">PNEU</Text>
-          <Text fontSize="70" fontFamily="inter" color="white" textAlign="center" w="full" bold>{countPneus}</Text>
-          <HStack space="30%">
-            <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={decreasePneus}>-</Button>
-            <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={increasePneus}>+</Button>
-          </HStack>
-        </Center>
-      </HStack>
+        {/* TOTAL KITS AND PNEUS SELLED */}
+        <HStack minW="300" w="90%" my={5} p={5} bg="gray.900" rounded="2xl">
+          <Center height="130" m={4} flex={.5}>
+            <Text fontSize="100" fontFamily="inter" color="white" w="full" textAlign="center" bold>{selledKits}</Text>
+            <Text fontSize="30" fontFamily="inter" color="gray.400" w="full" textAlign="center">KITS</Text>
+          </Center>
+          <Center height="130" m={4} flex={.5}>
+            <Text fontSize="100" fontFamily="inter" color="white" w="full" textAlign="center" bold >{selledPneus}</Text>
+            <Text fontSize="30" fontFamily="inter" color="gray.400" w="full" textAlign="center">PNEUS</Text>
+          </Center>
+        </HStack>
 
-      <VStack space={5} width="90%">
-        <Center>
-          <Text fontFamily="inter" fontSize={24} color="white" width="95%">Full Tuning</Text>
-          <Select
-            selectedValue={valueFullTuning}
-            minW="100%"
-            mt={1}
-            h={12}
-            rounded="xl"
-            color="white"
-            borderColor="gray.700"
-            fontSize={20}
-            placeholderTextColor="gray.400"
-            accessibilityLabel="Selecione uma opção de tunagem"
-            placeholder="Selecione uma opção"
-            onValueChange={itemValue => setValueFullTuning(itemValue)}
-            _selectedItem={{
-              bg: "green.400",
-              rounded: 15
-            }}
-          >
-            <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Sem Full Tuning" value="0" />
-            <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV3 - Sem Blindagem" value="1" />
-            <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV3 - Com Blindagem" value="2" />
-            <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV4 - Sem Blindagem" value="3" />
-            <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV4 - Com Blindagem" value="4" />
-          </Select>
-        </Center>
+        {/* KITS AND PNEUS TO SELL */}
+        <HStack minW="300" w="90%" my={5}>
+          <Center m={4} py={4} px={8} flex={.5} bg="gray.900" rounded="2xl">
+            <Text fontSize="25" fontFamily="inter" fontWeight="400" color="gray.400" textAlign="center" w="full">KIT</Text>
+            <Text fontSize="70" fontFamily="inter" color="white" textAlign="center" w="full" bold>{countKits}</Text>
+            <HStack space="30%">
+              <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={decreaseKits}>-</Button>
+              <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={increaseKits}>+</Button>
+            </HStack>
+          </Center>
 
-        {/* <ComponentContainer>
-            <ComponentTitle>Transmissão</ComponentTitle>
+          <Center m={4} py={4} px={8} flex={.5} bg="gray.900" rounded="2xl">
+            <Text fontSize="25" fontFamily="inter" fontWeight="400" color="gray.400" textAlign="center" w="full">PNEU</Text>
+            <Text fontSize="70" fontFamily="inter" color="white" textAlign="center" w="full" bold>{countPneus}</Text>
+            <HStack space="30%">
+              <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={decreasePneus}>-</Button>
+              <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={increasePneus}>+</Button>
+            </HStack>
+          </Center>
+        </HStack>
+
+        {/* SELECTS FROM PERFORMANCE */}
+        <VStack space={5} width="90%">
+          <Center>
+            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Full Tuning</Text>
             <Select
-              data={transmissionTypes}
-              defaultValueByIndex={0}
-              buttonStyle={buttonSelectStyles}
-              buttonTextStyle={buttonSelectTextStyles}
-              rowStyle={buttonSelectStyles}
-              rowTextStyle={buttonSelectTextStyles}
-              renderDropdownIcon={isOpened => {
-                return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
+              selectedValue={valueFullTuning}
+              minW="100%"
+              mt={1}
+              h={12}
+              rounded="xl"
+              color="white"
+              borderColor="gray.700"
+              fontSize={20}
+              placeholderTextColor="gray.400"
+              accessibilityLabel="Selecione uma opção de tunagem"
+              placeholder="Selecione uma opção"
+              onValueChange={itemValue => selectionFullTuning(itemValue)}
+              _selectedItem={{
+                bg: "green.400",
+                rounded: 15,
               }}
-              onSelect={(selectedItem, index) => {
-                selectionTransmission(index)
-              }}
-              buttonTextAfterSelection={(selectedItem) => {
-                return selectedItem
-              }}
-              rowTextForSelection={(item, index) => {
-                return item
-              }}
-            />
-          </ComponentContainer>
+            >
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Sem Full Tuning" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV3 - Sem Blindagem" value="1" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV3 - Com Blindagem" value="2" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV4 - Sem Blindagem" value="3" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV4 - Com Blindagem" value="4" />
+            </Select>
+          </Center>
 
-          <ComponentContainer>
-            <ComponentTitle>Suspensão</ComponentTitle>
+          <Center>
+            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Transmissão</Text>
             <Select
-              data={suspensionTypes}
-              defaultValueByIndex={0}
-              buttonStyle={buttonSelectStyles}
-              buttonTextStyle={buttonSelectTextStyles}
-              rowStyle={buttonSelectStyles}
-              rowTextStyle={buttonSelectTextStyles}
-              renderDropdownIcon={isOpened => {
-                return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
+              selectedValue={valueTransmission}
+              minW="100%"
+              mt={1}
+              h={12}
+              rounded="xl"
+              color="white"
+              borderColor="gray.700"
+              fontSize={20}
+              placeholderTextColor="gray.400"
+              accessibilityLabel="Selecione uma opção de tunagem"
+              placeholder="Selecione uma opção"
+              onValueChange={itemValue => selectionTransmission(itemValue)}
+              _selectedItem={{
+                bg: "green.400",
+                rounded: 15
               }}
-              onSelect={(selectedItem, index) => {
-                selectionSuspension(index)
-              }}
-              buttonTextAfterSelection={(selectedItem) => {
-                return selectedItem
-              }}
-              rowTextForSelection={(item, index) => {
-                return item
-              }}
-            />
-          </ComponentContainer>
+              isDisabled={priceFullTuning != 0 ? true : false}
+            >
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 0" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 1" value="1" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 2" value="2" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 3" value="3" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 4" value="4" />
+            </Select>
+          </Center>
 
-          <ComponentContainer>
-            <ComponentTitle>Motor</ComponentTitle>
+          <Center>
+            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Suspensão</Text>
             <Select
-              data={engineTypes}
-              defaultValueByIndex={0}
-              buttonStyle={buttonSelectStyles}
-              buttonTextStyle={buttonSelectTextStyles}
-              rowStyle={buttonSelectStyles}
-              rowTextStyle={buttonSelectTextStyles}
-              renderDropdownIcon={isOpened => {
-                return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
+              selectedValue={valueSuspension}
+              minW="100%"
+              mt={1}
+              h={12}
+              rounded="xl"
+              color="white"
+              borderColor="gray.700"
+              fontSize={20}
+              placeholderTextColor="gray.400"
+              accessibilityLabel="Selecione uma opção de tunagem"
+              placeholder="Selecione uma opção"
+              onValueChange={itemValue => selectionSuspension(itemValue)}
+              _selectedItem={{
+                bg: "green.400",
+                rounded: 15
               }}
-              onSelect={(selectedItem, index) => {
-                selectionEngine(index)
-              }}
-              buttonTextAfterSelection={(selectedItem) => {
-                return selectedItem
-              }}
-              rowTextForSelection={(item, index) => {
-                return item
-              }}
-            />
-          </ComponentContainer>
+              isDisabled={priceFullTuning != 0 ? true : false}
+            >
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 0" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 1" value="1" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 2" value="2" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 3" value="3" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 4" value="4" />
+            </Select>
+          </Center>
 
-          <ComponentContainer>
-            <ComponentTitle>Freio</ComponentTitle>
+          <Center>
+            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Motor</Text>
             <Select
-              data={brakeTypes}
-              defaultValueByIndex={0}
-              buttonStyle={buttonSelectStyles}
-              buttonTextStyle={buttonSelectTextStyles}
-              rowStyle={buttonSelectStyles}
-              rowTextStyle={buttonSelectTextStyles}
-              renderDropdownIcon={isOpened => {
-                return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
+              selectedValue={valueEngine}
+              minW="100%"
+              mt={1}
+              h={12}
+              rounded="xl"
+              color="white"
+              borderColor="gray.700"
+              fontSize={20}
+              placeholderTextColor="gray.400"
+              accessibilityLabel="Selecione uma opção de tunagem"
+              placeholder="Selecione uma opção"
+              onValueChange={itemValue => selectionEngine(itemValue)}
+              _selectedItem={{
+                bg: "green.400",
+                rounded: 15
               }}
-              onSelect={(selectedItem, index) => {
-                selectionBrake(index)
-              }}
-              buttonTextAfterSelection={(selectedItem) => {
-                return selectedItem
-              }}
-              rowTextForSelection={(item, index) => {
-                return item
-              }}
-            />
-          </ComponentContainer>
+              isDisabled={priceFullTuning != 0 ? true : false}
+            >
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 0" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 1" value="1" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 2" value="2" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 3" value="3" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 4" value="4" />
+            </Select>
+          </Center>
 
-          <ComponentContainer>
-            <ComponentTitle>Blindagem</ComponentTitle>
+          <Center>
+            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Freio</Text>
             <Select
-              data={shieldTypes}
-              defaultValueByIndex={0}
-              buttonStyle={buttonSelectStyles}
-              buttonTextStyle={buttonSelectTextStyles}
-              rowStyle={buttonSelectStyles}
-              rowTextStyle={buttonSelectTextStyles}
-              renderDropdownIcon={isOpened => {
-                return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
+              selectedValue={valueBrake}
+              minW="100%"
+              mt={1}
+              h={12}
+              rounded="xl"
+              color="white"
+              borderColor="gray.700"
+              fontSize={20}
+              placeholderTextColor="gray.400"
+              accessibilityLabel="Selecione uma opção de tunagem"
+              placeholder="Selecione uma opção"
+              onValueChange={itemValue => selectionBrake(itemValue)}
+              _selectedItem={{
+                bg: "green.400",
+                rounded: 15
               }}
-              onSelect={(selectedItem, index) => {
-                selectionShield(index)
-              }}
-              buttonTextAfterSelection={(selectedItem) => {
-                return selectedItem
-              }}
-              rowTextForSelection={(item, index) => {
-                return item
-              }}
-            />
-          </ComponentContainer>
+              isDisabled={priceFullTuning != 0 ? true : false}
+            >
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 0" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 1" value="1" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 2" value="2" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 3" value="3" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 4" value="4" />
+            </Select>
+          </Center>
 
-          <ComponentContainer>
-            <ComponentTitle>Turbo</ComponentTitle>
+          <Center>
+            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Blindagem</Text>
             <Select
-              data={turboTypes}
-              defaultValueByIndex={0}
-              buttonStyle={buttonSelectStyles}
-              buttonTextStyle={buttonSelectTextStyles}
-              rowStyle={buttonSelectStyles}
-              rowTextStyle={buttonSelectTextStyles}
-              renderDropdownIcon={isOpened => {
-                return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#FFF'} size={18} />;
+              selectedValue={valueShield}
+              minW="100%"
+              mt={1}
+              h={12}
+              rounded="xl"
+              color="white"
+              borderColor="gray.700"
+              fontSize={20}
+              placeholderTextColor="gray.400"
+              accessibilityLabel="Selecione uma opção de tunagem"
+              placeholder="Selecione uma opção"
+              onValueChange={itemValue => selectionShield(itemValue)}
+              _selectedItem={{
+                bg: "green.400",
+                rounded: 15
               }}
-              onSelect={(selectedItem, index) => {
-                selectionTurbo(index)
-              }}
-              buttonTextAfterSelection={(selectedItem) => {
-                return selectedItem
-              }}
-              rowTextForSelection={(item, index) => {
-                return item
-              }}
-            />
-          </ComponentContainer> */}
+              isDisabled={priceFullTuning != 0 ? true : false}
+            >
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 0" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 1" value="1" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 2" value="2" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 3" value="3" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 4" value="4" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 5" value="5" />
+            </Select>
+          </Center>
 
-      </VStack >
+          <Center>
+            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Turbo</Text>
+            <Select
+              selectedValue={valueTurbo}
+              minW="100%"
+              mt={1}
+              h={12}
+              rounded="xl"
+              color="white"
+              borderColor="gray.700"
+              fontSize={20}
+              placeholderTextColor="gray.400"
+              accessibilityLabel="Selecione uma opção de tunagem"
+              placeholder="Selecione uma opção"
+              onValueChange={itemValue => selectionTurbo(itemValue)}
+              _selectedItem={{
+                bg: "green.400",
+                rounded: 15
+              }}
+              isDisabled={priceFullTuning != 0 ? true : false}
+            >
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Não" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Sim" value="1" />
+            </Select>
+          </Center>
 
-      {/* <TotalContainer>
+        </VStack >
+
+        {/* <TotalContainer>
           <TotalValueText>$  <TextValue>{totalPrice}</TextValue></TotalValueText>
           <FinishButton onPress={onFinished}><TextFinish>FINALIZAR</TextFinish></FinishButton>
         </TotalContainer> */}
-    </Center >
+      </Center >
+    </ScrollView>
   );
 }
 

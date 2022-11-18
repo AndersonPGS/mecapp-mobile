@@ -16,6 +16,7 @@ export default function App() {
 
 
   const theme = extendTheme({
+    initialColorMode: 'dark',
     fontConfig: {
       Inter: {
         400: {
