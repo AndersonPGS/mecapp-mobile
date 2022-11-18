@@ -1,7 +1,5 @@
+import { Center, HStack, Text } from "native-base";
 import React, { useEffect, useState } from "react";
-import SelectDropdown from "react-native-select-dropdown";
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { ComponentContainer, ComponentsContainer, ComponentTitle, Container, CounterContainer, FinishButton, ItensContainer, Number, SafeArea, SellerButton, SellerButtonContainer, SellerContainer, SellerItem, TextButton, TextFinish, TextValue, Title, TotalContainer, TotalValueText } from "./styles";
 
 export default function Home() {
   const fulltuningTypes = ["Sem Full Tuning", "LV3 - Sem Blindagem", "LV3 - Com Blindagem", "LV4 - Sem Blindagem", "LV4 - Com Blindagem"]
@@ -248,31 +246,20 @@ export default function Home() {
   }
 
 
-  const buttonSelectStyles = {
-    backgroundColor: "#222224",
-    width: "100%",
-    borderRadius: 12,
-  }
-
-  const buttonSelectTextStyles = {
-    color: "#fff",
-    fontFamily: "Inter-Regular",
-  }
   return (
-    <Container>
-      <SafeArea>
-        <CounterContainer>
-          <ItensContainer>
-            <Number>{selledKits}</Number>
-            <Title>KITS</Title>
-          </ItensContainer>
-          <ItensContainer>
-            <Number>{selledPneus}</Number>
-            <Title>PNEUS</Title>
-          </ItensContainer>
-        </CounterContainer>
+    <Center width="full" bg="black" safeArea>
+      <HStack minW="300" w="90%" maxW="full" my={5} p={5} bg="gray.900" borderRadius={20}>
+        <Center height="130" m={4} flex={.5}>
+          <Text fontSize="100" fontFamily="inter" color="white" width="full" textAlign="center" bold>{selledKits}</Text>
+          <Text fontSize="30" fontFamily="inter" color="gray.400" width="full" textAlign="center">KITS</Text>
+        </Center>
+        <Center height="130" m={4} flex={.5}>
+          <Text fontSize="100" fontFamily="inter" color="white" width="full" textAlign="center" bold >{selledPneus}</Text>
+          <Text fontSize="30" fontFamily="inter" color="gray.400" width="full" textAlign="center">PNEUS</Text>
+        </Center>
+      </HStack>
 
-        <SellerContainer>
+      {/* <SellerContainer>
           <SellerItem>
             <Title>KIT</Title>
             <Number>{countKits}</Number>
@@ -290,12 +277,13 @@ export default function Home() {
               <SellerButton onPress={increasePneus}><TextButton>+</TextButton></SellerButton>
             </SellerButtonContainer>
           </SellerItem>
-        </SellerContainer>
+        </SellerContainer> */}
 
-        <ComponentsContainer>
+      {/* <ComponentsContainer>
           <ComponentContainer>
             <ComponentTitle>Full Tuning</ComponentTitle>
-            <SelectDropdown
+            <Select
+              // selectedValue={service}
               data={fulltuningTypes}
               defaultValueByIndex={0}
               buttonStyle={buttonSelectStyles}
@@ -319,7 +307,7 @@ export default function Home() {
 
           <ComponentContainer>
             <ComponentTitle>Transmissão</ComponentTitle>
-            <SelectDropdown
+            <Select
               data={transmissionTypes}
               defaultValueByIndex={0}
               buttonStyle={buttonSelectStyles}
@@ -343,7 +331,7 @@ export default function Home() {
 
           <ComponentContainer>
             <ComponentTitle>Suspensão</ComponentTitle>
-            <SelectDropdown
+            <Select
               data={suspensionTypes}
               defaultValueByIndex={0}
               buttonStyle={buttonSelectStyles}
@@ -367,7 +355,7 @@ export default function Home() {
 
           <ComponentContainer>
             <ComponentTitle>Motor</ComponentTitle>
-            <SelectDropdown
+            <Select
               data={engineTypes}
               defaultValueByIndex={0}
               buttonStyle={buttonSelectStyles}
@@ -391,7 +379,7 @@ export default function Home() {
 
           <ComponentContainer>
             <ComponentTitle>Freio</ComponentTitle>
-            <SelectDropdown
+            <Select
               data={brakeTypes}
               defaultValueByIndex={0}
               buttonStyle={buttonSelectStyles}
@@ -415,7 +403,7 @@ export default function Home() {
 
           <ComponentContainer>
             <ComponentTitle>Blindagem</ComponentTitle>
-            <SelectDropdown
+            <Select
               data={shieldTypes}
               defaultValueByIndex={0}
               buttonStyle={buttonSelectStyles}
@@ -439,7 +427,7 @@ export default function Home() {
 
           <ComponentContainer>
             <ComponentTitle>Turbo</ComponentTitle>
-            <SelectDropdown
+            <Select
               data={turboTypes}
               defaultValueByIndex={0}
               buttonStyle={buttonSelectStyles}
@@ -461,14 +449,13 @@ export default function Home() {
             />
           </ComponentContainer>
 
-        </ComponentsContainer>
+        </ComponentsContainer> */}
 
-        <TotalContainer>
+      {/* <TotalContainer>
           <TotalValueText>$  <TextValue>{totalPrice}</TextValue></TotalValueText>
           <FinishButton onPress={onFinished}><TextFinish>FINALIZAR</TextFinish></FinishButton>
-        </TotalContainer>
-      </SafeArea>
-    </Container>
+        </TotalContainer> */}
+    </Center>
   );
 }
 

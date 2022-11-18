@@ -1,5 +1,7 @@
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
+import { extendTheme, NativeBaseProvider } from 'native-base';
+import React from 'react';
 import Home from './src/Home/Home';
 
 export default function App() {
@@ -15,11 +17,36 @@ export default function App() {
     return null;
   }
 
+  const theme = extendTheme({
+    fontConfig: {
+      Inter: {
+        400: {
+          normal: 'Inter-Regular',
+        },
+        500: {
+          normal: 'Inter-Medium',
+        },
+        600: {
+          normal: 'Inter-SemiBold',
+        },
+        700: {
+          normal: 'Inter-Bold',
+        },
+        800: {
+          normal: 'Inter-Black',
+        },
+      },
+
+      fonts: {
+        inter: 'Inter',
+      },
+    }
+  })
   return (
-    <>
+    <NativeBaseProvider theme={theme}>
       <StatusBar style="light" />
       <Home />
-    </>
+    </NativeBaseProvider>
   );
 }
 
