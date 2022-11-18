@@ -43,7 +43,7 @@ export default function App() {
     }
   })
   return (
-    <NativeBaseProvider theme={theme}>
+    <NativeBaseProvider theme={theme} >
       <StatusBar style="light" />
       <Home />
     </NativeBaseProvider>

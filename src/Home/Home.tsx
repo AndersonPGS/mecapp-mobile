@@ -1,4 +1,4 @@
-import { Center, HStack, Text } from "native-base";
+import { Button, Center, HStack, Text } from "native-base";
 import React, { useEffect, useState } from "react";
 
 export default function Home() {
@@ -247,37 +247,37 @@ export default function Home() {
 
 
   return (
-    <Center width="full" bg="black" safeArea>
-      <HStack minW="300" w="90%" maxW="full" my={5} p={5} bg="gray.900" borderRadius={20}>
+    <Center w="full" bg="black" safeArea>
+      <HStack minW="300" w="90%" maxW="full" my={5} p={5} bg="gray.900" rounded="2xl">
         <Center height="130" m={4} flex={.5}>
-          <Text fontSize="100" fontFamily="inter" color="white" width="full" textAlign="center" bold>{selledKits}</Text>
-          <Text fontSize="30" fontFamily="inter" color="gray.400" width="full" textAlign="center">KITS</Text>
+          <Text fontSize="100" fontFamily="inter" color="white" w="full" textAlign="center" bold>{selledKits}</Text>
+          <Text fontSize="30" fontFamily="inter" color="gray.400" w="full" textAlign="center">KITS</Text>
         </Center>
         <Center height="130" m={4} flex={.5}>
-          <Text fontSize="100" fontFamily="inter" color="white" width="full" textAlign="center" bold >{selledPneus}</Text>
-          <Text fontSize="30" fontFamily="inter" color="gray.400" width="full" textAlign="center">PNEUS</Text>
+          <Text fontSize="100" fontFamily="inter" color="white" w="full" textAlign="center" bold >{selledPneus}</Text>
+          <Text fontSize="30" fontFamily="inter" color="gray.400" w="full" textAlign="center">PNEUS</Text>
         </Center>
       </HStack>
 
-      {/* <SellerContainer>
-          <SellerItem>
-            <Title>KIT</Title>
-            <Number>{countKits}</Number>
-            <SellerButtonContainer>
-              <SellerButton onPress={decreaseKits}><TextButton>-</TextButton></SellerButton>
-              <SellerButton onPress={increaseKits}><TextButton>+</TextButton></SellerButton>
-            </SellerButtonContainer>
-          </SellerItem>
+      <HStack minW="300" w="90%" maxW="full" my={5}>
+        <Center m={4} py={4} px={8} flex={.5} bg="gray.900" rounded="2xl">
+          <Text fontSize="25" fontFamily="inter" fontWeight="400" color="gray.400" textAlign="center" w="full">KIT</Text>
+          <Text fontSize="70" fontFamily="inter" color="white" textAlign="center" w="full" bold>{countKits}</Text>
+          <HStack space="30%">
+            <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={decreaseKits}>-</Button>
+            <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={increaseKits}>+</Button>
+          </HStack>
+        </Center>
 
-          <SellerItem>
-            <Title>PNEU</Title>
-            <Number>{countPneus}</Number>
-            <SellerButtonContainer>
-              <SellerButton onPress={decreasePneus}><TextButton>-</TextButton></SellerButton>
-              <SellerButton onPress={increasePneus}><TextButton>+</TextButton></SellerButton>
-            </SellerButtonContainer>
-          </SellerItem>
-        </SellerContainer> */}
+        <Center m={4} py={4} px={8} flex={.5} bg="gray.900" rounded="2xl">
+          <Text fontSize="25" fontFamily="inter" fontWeight="400" color="gray.400" textAlign="center" w="full">PNEU</Text>
+          <Text fontSize="70" fontFamily="inter" color="white" textAlign="center" w="full" bold>{countPneus}</Text>
+          <HStack space="30%">
+            <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={decreasePneus}>-</Button>
+            <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={increasePneus}>+</Button>
+          </HStack>
+        </Center>
+      </HStack>
 
       {/* <ComponentsContainer>
           <ComponentContainer>
