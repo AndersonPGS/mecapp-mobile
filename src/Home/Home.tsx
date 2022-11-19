@@ -620,6 +620,7 @@ export default function Home() {
               minW="100%"
               mt={1}
               h={12}
+              bg="gray.900"
               rounded="xl"
               color="white"
               borderColor="gray.700"
@@ -649,6 +650,7 @@ export default function Home() {
               minW="100%"
               mt={1}
               h={12}
+              bg="gray.900"
               rounded="xl"
               color="white"
               borderColor="gray.700"
@@ -679,6 +681,7 @@ export default function Home() {
               minW="100%"
               mt={1}
               h={12}
+              bg="gray.900"
               rounded="xl"
               color="white"
               borderColor="gray.700"
@@ -709,6 +712,7 @@ export default function Home() {
               minW="100%"
               mt={1}
               h={12}
+              bg="gray.900"
               rounded="xl"
               color="white"
               borderColor="gray.700"
@@ -739,6 +743,7 @@ export default function Home() {
               minW="100%"
               mt={1}
               h={12}
+              bg="gray.900"
               rounded="xl"
               color="white"
               borderColor="gray.700"
@@ -769,6 +774,7 @@ export default function Home() {
               minW="100%"
               mt={1}
               h={12}
+              bg="gray.900"
               rounded="xl"
               color="white"
               borderColor="gray.700"
@@ -800,6 +806,7 @@ export default function Home() {
               minW="100%"
               mt={1}
               h={12}
+              bg="gray.900"
               rounded="xl"
               color="white"
               borderColor="gray.700"
