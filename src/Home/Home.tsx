@@ -623,7 +623,7 @@ export default function Home() {
               bg="gray.900"
               rounded="xl"
               color="white"
-              borderColor="gray.700"
+              borderColor="gray.800"
               fontSize={20}
               placeholderTextColor="gray.400"
               accessibilityLabel="Selecione uma opção de tunagem"
@@ -653,7 +653,7 @@ export default function Home() {
               bg="gray.900"
               rounded="xl"
               color="white"
-              borderColor="gray.700"
+              borderColor="gray.800"
               fontSize={20}
               placeholderTextColor="gray.400"
               accessibilityLabel="Selecione uma opção de tunagem"
@@ -684,7 +684,7 @@ export default function Home() {
               bg="gray.900"
               rounded="xl"
               color="white"
-              borderColor="gray.700"
+              borderColor="gray.800"
               fontSize={20}
               placeholderTextColor="gray.400"
               accessibilityLabel="Selecione uma opção de tunagem"
@@ -715,7 +715,7 @@ export default function Home() {
               bg="gray.900"
               rounded="xl"
               color="white"
-              borderColor="gray.700"
+              borderColor="gray.800"
               fontSize={20}
               placeholderTextColor="gray.400"
               accessibilityLabel="Selecione uma opção de tunagem"
@@ -746,7 +746,7 @@ export default function Home() {
               bg="gray.900"
               rounded="xl"
               color="white"
-              borderColor="gray.700"
+              borderColor="gray.800"
               fontSize={20}
               placeholderTextColor="gray.400"
               accessibilityLabel="Selecione uma opção de tunagem"
@@ -777,7 +777,7 @@ export default function Home() {
               bg="gray.900"
               rounded="xl"
               color="white"
-              borderColor="gray.700"
+              borderColor="gray.800"
               fontSize={20}
               placeholderTextColor="gray.400"
               accessibilityLabel="Selecione uma opção de tunagem"
@@ -809,7 +809,7 @@ export default function Home() {
               bg="gray.900"
               rounded="xl"
               color="white"
-              borderColor="gray.700"
+              borderColor="gray.800"
               fontSize={20}
               placeholderTextColor="gray.400"
               accessibilityLabel="Selecione uma opção de tunagem"
