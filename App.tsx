@@ -1,19 +1,48 @@
+
 import * as Font from "expo-font";
+import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { extendTheme, NativeBaseProvider } from 'native-base';
-import React from 'react';
+import { extendTheme, NativeBaseProvider, View } from 'native-base';
+import React, { useCallback, useEffect, useState } from 'react';
 import Home from './src/Home/Home';
 
 export default function App() {
-  async () =>
-    await Font.loadAsync({
-      'Inter-Black': require('./assets/fonts/Inter/Inter-Black.ttf'),
-      'Inter-Bold': require('./assets/fonts/Inter/Inter-Bold.ttf'),
-      'Inter-Medium': require('./assets/fonts/Inter/Inter-Medium.ttf'),
-      'Inter-Regular': require('./assets/fonts/Inter/Inter-Regular.ttf'),
-      'Inter-SemiBold': require('./assets/fonts/Inter/Inter-SemiBold.ttf'),
-    });
 
+  SplashScreen.preventAutoHideAsync();
+
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await Font.loadAsync({
+          'InterBlack': require('./assets/fonts/Inter/Inter-Black.ttf'),
+          'InterBold': require('./assets/fonts/Inter/Inter-Bold.ttf'),
+          'InterMedium': require('./assets/fonts/Inter/Inter-Medium.ttf'),
+          'InterRegular': require('./assets/fonts/Inter/Inter-Regular.ttf'),
+          'InterSemiBold': require('./assets/fonts/Inter/Inter-SemiBold.ttf'),
+        });
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
 
   const theme = extendTheme({
     initialColorMode: 'dark',
@@ -41,10 +70,13 @@ export default function App() {
       },
     }
   })
+
   return (
     <NativeBaseProvider theme={theme} >
-      <StatusBar style="light" />
-      <Home />
+      <View onLayout={onLayoutRootView}>
+        <StatusBar style="light" />
+        <Home />
+      </View>
     </NativeBaseProvider>
   );
 }

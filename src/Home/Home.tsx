@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button, Center, HStack, ScrollView, Select, Switch, Text, VStack } from "native-base";
 import React, { useEffect, useState } from "react";
 
@@ -46,6 +47,67 @@ export default function Home() {
   const [hasColorDashboard, setHasColorDashboard] = useState(false)
 
   const [totalPrice, setTotalPrice] = useState(0)
+
+  const date = new Date()
+
+  const storeDate = (value: string) => {
+    AsyncStorage.setItem("date", value)
+  }
+
+  const getStoredDate = async () => {
+    const value = await AsyncStorage.getItem("date")
+
+    if (value !== null) {
+      return value
+    } else {
+      const todayDate = date.getDate().toString()
+      return todayDate
+    }
+  }
+
+  const storeKits = (value: string) => {
+    AsyncStorage.setItem("kits", value)
+  }
+
+  const getStoredKits = async () => {
+    const value = await AsyncStorage.getItem("kits")
+
+    if (value !== null) {
+      setSelledKits(+value)
+    } else {
+      setSelledKits(0)
+    }
+  }
+
+  const storePneus = (value: string) => {
+    AsyncStorage.setItem("pneus", value)
+  }
+
+  const getStoredPneus = async () => {
+    const value = await AsyncStorage.getItem("pneus")
+
+    if (value !== null) {
+      setSelledPneus(+value)
+    } else {
+      setSelledPneus(0)
+    }
+  }
+
+  useEffect(() => {
+    const currentDate = date.getDate().toString()
+    const storedDate = getStoredDate().then(data => { return data })
+    async function checkStored() {
+      if (await storedDate == currentDate) {
+        getStoredKits()
+        getStoredPneus()
+      } else {
+        storeDate(currentDate)
+        storeKits("0")
+        storePneus("0")
+      }
+    }
+    checkStored()
+  }, [])
 
   useEffect(() => {
     let costPerKit = isPartner ? 2000 : 2500
@@ -173,9 +235,21 @@ export default function Home() {
     ]
   )
 
+  useEffect(() => {
+    if (selledKits > 0) {
+      storeKits(selledKits.toString())
+    }
+    if (selledPneus > 0) {
+      storePneus(selledPneus.toString())
+    }
+  }, [selledKits, selledPneus])
+
   function onFinished() {
     setSelledKits((selledKits) => selledKits + countKits)
     setSelledPneus((selledPneus) => selledPneus + countPneus)
+
+    console.log("selledKits finished " + selledKits.toString())
+    console.log("selledPneus finished " + selledPneus.toString())
 
     setIsPartner(false)
     setCountKits(0)
@@ -495,52 +569,52 @@ export default function Home() {
 
         {/* TOTAL KITS AND PNEUS SELLED */}
         <VStack minW="300" w="90%" my={5} p={5} bg="gray.900" rounded="2xl">
-          <Text w="full" textAlign="center" color="gray.400" fontSize={24} fontFamily="inter" bold>VENDIDOS HOJE</Text>
+          <Text w="full" textAlign="center" color="gray.400" fontSize={24} fontFamily="InterMedium" bold>VENDIDOS HOJE</Text>
           <HStack >
             <Center height="130" m={4} flex={.5}>
-              <Text fontSize="100" fontFamily="inter" color="white" w="full" textAlign="center" bold>{selledKits}</Text>
-              <Text fontSize="30" fontFamily="inter" color="gray.400" w="full" textAlign="center">KITS</Text>
+              <Text fontSize="100" fontFamily="InterMedium" color="white" w="full" textAlign="center" bold>{selledKits}</Text>
+              <Text fontSize="30" fontFamily="InterMedium" color="gray.400" w="full" textAlign="center">KITS</Text>
             </Center>
-            <Text fontSize="100" fontFamily="inter" color="gray.800" textAlign="center">|</Text>
+            <Text fontSize="100" fontFamily="InterMedium" color="gray.800" textAlign="center">|</Text>
             <Center height="130" m={4} flex={.5}>
-              <Text fontSize="100" fontFamily="inter" color="white" w="full" textAlign="center" bold >{selledPneus}</Text>
-              <Text fontSize="30" fontFamily="inter" color="gray.400" w="full" textAlign="center">PNEUS</Text>
+              <Text fontSize="100" fontFamily="InterMedium" color="white" w="full" textAlign="center" bold >{selledPneus}</Text>
+              <Text fontSize="30" fontFamily="InterMedium" color="gray.400" w="full" textAlign="center">PNEUS</Text>
             </Center>
           </HStack>
         </VStack>
 
         {/* KITS AND PNEUS TO SELL */}
-        <Text w="full" mt={7} textAlign="center" color="gray.400" fontSize={24} fontFamily="inter" bold>KITS & PNEUS</Text>
+        <Text w="full" mt={7} textAlign="center" color="gray.400" fontSize={24} fontFamily="InterMedium" bold>KITS & PNEUS</Text>
         <HStack minW="300" w="90%">
           <Center m={4} py={4} px={8} flex={.5} bg="gray.900" rounded="2xl">
-            <Text fontSize="25" fontFamily="inter" fontWeight="400" color="gray.400" textAlign="center" w="full">KIT</Text>
-            <Text fontSize="70" fontFamily="inter" color="white" textAlign="center" w="full" bold>{countKits}</Text>
+            <Text fontSize="25" fontFamily="InterMedium" fontWeight="400" color="gray.400" textAlign="center" w="full">KIT</Text>
+            <Text fontSize="70" fontFamily="InterMedium" color="white" textAlign="center" w="full" bold>{countKits}</Text>
             <HStack space="30%">
-              <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={decreaseKits}>-</Button>
-              <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={increaseKits}>+</Button>
+              <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "InterMedium", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={decreaseKits}>-</Button>
+              <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "InterMedium", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={increaseKits}>+</Button>
             </HStack>
           </Center>
 
           <Center m={4} py={4} px={8} flex={.5} bg="gray.900" rounded="2xl">
-            <Text fontSize="25" fontFamily="inter" fontWeight="400" color="gray.400" textAlign="center" w="full">PNEU</Text>
-            <Text fontSize="70" fontFamily="inter" color="white" textAlign="center" w="full" bold>{countPneus}</Text>
+            <Text fontSize="25" fontFamily="InterMedium" fontWeight="400" color="gray.400" textAlign="center" w="full">PNEU</Text>
+            <Text fontSize="70" fontFamily="InterMedium" color="white" textAlign="center" w="full" bold>{countPneus}</Text>
             <HStack space="30%">
-              <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={decreasePneus}>-</Button>
-              <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "inter", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={increasePneus}>+</Button>
+              <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "InterMedium", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={decreasePneus}>-</Button>
+              <Button w="12" h="10" bg="gray.700" _text={{ fontFamily: "InterMedium", fontSize: 30, lineHeight: 30, fontWeight: 800 }} rounded="lg" onPress={increasePneus}>+</Button>
             </HStack>
           </Center>
         </HStack>
         <HStack w="80%" alignItems="center" justifyContent="space-between">
-          <Text textAlign="center" color="white" fontSize={24} fontFamily="inter">Parceria</Text>
+          <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium">Parceria</Text>
           <Switch size="md" isChecked={isPartner} onToggle={() => setIsPartner(!isPartner)} />
         </HStack>
 
         {/* SELECTS FROM PERFORMANCE */}
-        <Text w="full" mt={7} textAlign="center" color="gray.400" fontSize={24} fontFamily="inter" bold>PERFORMANCE</Text>
+        <Text w="full" mt={7} textAlign="center" color="gray.400" fontSize={24} fontFamily="InterMedium" bold>PERFORMANCE</Text>
         <VStack space={5} width="90%">
           {/* FULL TUNING */}
           <Center>
-            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Full Tuning</Text>
+            <Text fontFamily="InterMedium" fontSize={24} color="white" width="95%">Full Tuning</Text>
             <Select
               selectedValue={valueFullTuning}
               minW="100%"
@@ -559,17 +633,17 @@ export default function Home() {
                 rounded: 15,
               }}
             >
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Sem Full Tuning" value="0" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV3 - Sem Blindagem" value="1" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV3 - Com Blindagem" value="2" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV4 - Sem Blindagem" value="3" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="LV4 - Com Blindagem" value="4" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Sem Full Tuning" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="LV3 - Sem Blindagem" value="1" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="LV3 - Com Blindagem" value="2" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="LV4 - Sem Blindagem" value="3" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="LV4 - Com Blindagem" value="4" />
             </Select>
           </Center>
 
           {/* TRANSMISSION */}
           <Center>
-            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Transmissão</Text>
+            <Text fontFamily="InterMedium" fontSize={24} color="white" width="95%">Transmissão</Text>
             <Select
               selectedValue={valueTransmission}
               minW="100%"
@@ -589,17 +663,17 @@ export default function Home() {
               }}
               isDisabled={priceFullTuning != 0 ? true : false}
             >
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 0" value="0" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 1" value="1" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 2" value="2" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 3" value="3" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 4" value="4" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 0" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 1" value="1" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 2" value="2" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 3" value="3" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 4" value="4" />
             </Select>
           </Center>
 
           {/* SUSPENSION */}
           <Center>
-            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Suspensão</Text>
+            <Text fontFamily="InterMedium" fontSize={24} color="white" width="95%">Suspensão</Text>
             <Select
               selectedValue={valueSuspension}
               minW="100%"
@@ -619,17 +693,17 @@ export default function Home() {
               }}
               isDisabled={priceFullTuning != 0 ? true : false}
             >
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 0" value="0" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 1" value="1" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 2" value="2" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 3" value="3" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 4" value="4" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 0" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 1" value="1" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 2" value="2" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 3" value="3" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 4" value="4" />
             </Select>
           </Center>
 
           {/* ENGINE */}
           <Center>
-            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Motor</Text>
+            <Text fontFamily="InterMedium" fontSize={24} color="white" width="95%">Motor</Text>
             <Select
               selectedValue={valueEngine}
               minW="100%"
@@ -649,17 +723,17 @@ export default function Home() {
               }}
               isDisabled={priceFullTuning != 0 ? true : false}
             >
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 0" value="0" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 1" value="1" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 2" value="2" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 3" value="3" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 4" value="4" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 0" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 1" value="1" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 2" value="2" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 3" value="3" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 4" value="4" />
             </Select>
           </Center>
 
           {/* BRAKE */}
           <Center>
-            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Freio</Text>
+            <Text fontFamily="InterMedium" fontSize={24} color="white" width="95%">Freio</Text>
             <Select
               selectedValue={valueBrake}
               minW="100%"
@@ -679,17 +753,17 @@ export default function Home() {
               }}
               isDisabled={priceFullTuning != 0 ? true : false}
             >
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 0" value="0" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 1" value="1" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 2" value="2" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 3" value="3" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 4" value="4" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 0" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 1" value="1" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 2" value="2" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 3" value="3" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 4" value="4" />
             </Select>
           </Center>
 
           {/* SHIELD */}
           <Center>
-            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Blindagem</Text>
+            <Text fontFamily="InterMedium" fontSize={24} color="white" width="95%">Blindagem</Text>
             <Select
               selectedValue={valueShield}
               minW="100%"
@@ -709,18 +783,18 @@ export default function Home() {
               }}
               isDisabled={priceFullTuning != 0 ? true : false}
             >
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 0" value="0" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 1" value="1" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 2" value="2" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 3" value="3" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 4" value="4" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Nível 5" value="5" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 0" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 1" value="1" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 2" value="2" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 3" value="3" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 4" value="4" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Nível 5" value="5" />
             </Select>
           </Center>
 
           {/* TURBO */}
           <Center>
-            <Text fontFamily="inter" fontSize={24} color="white" width="95%">Turbo</Text>
+            <Text fontFamily="InterMedium" fontSize={24} color="white" width="95%">Turbo</Text>
             <Select
               selectedValue={valueTurbo}
               minW="100%"
@@ -740,185 +814,185 @@ export default function Home() {
               }}
               isDisabled={priceFullTuning != 0 ? true : false}
             >
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Não" value="0" />
-              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "inter", fontWeight: 700 }} label="Sim" value="1" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Não" value="0" />
+              <Select.Item _text={{ minW: "100%", fontSize: 20, fontFamily: "InterMedium", fontWeight: 700 }} label="Sim" value="1" />
             </Select>
           </Center>
 
         </VStack >
 
         {/* SWITCHS FROM APPEARANCE */}
-        <Text w="full" mt={7} mb={2} textAlign="center" color="gray.400" fontSize={24} fontFamily="inter" bold>APARÊNCIA</Text>
+        <Text w="full" mt={7} mb={2} textAlign="center" color="gray.400" fontSize={24} fontFamily="InterMedium" bold>APARÊNCIA</Text>
         <VStack space={2} w="90%">
 
           {/* SPOILER */}
           <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium" bold>
               Aerofólio
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Spoiler</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Spoiler</Text>
             </Text>
             <Switch size="md" isChecked={hasSpoiler} onToggle={() => setHasSpoiler(!hasSpoiler)} />
           </HStack>
 
           {/* FRONT BUMPER */}
           <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium" bold>
               Parachoque Diant.
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Front Bumper</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Front Bumper</Text>
             </Text>
             <Switch size="md" isChecked={hasFrontBumper} onToggle={() => setHasFrontBumper(!hasFrontBumper)} />
           </HStack>
 
           {/* REAR BUMPER */}
           <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium" bold>
               Parachoque Tras.
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Rear Bumper</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Rear Bumper</Text>
             </Text>
             <Switch size="md" isChecked={hasRearBumper} onToggle={() => setHasRearBumper(!hasRearBumper)} />
           </HStack>
 
           {/* SIDE SKIRT */}
           <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium" bold>
               Saia Lateral
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Side Skirt</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Side Skirt</Text>
             </Text>
             <Switch size="md" isChecked={hasSideSkirt} onToggle={() => setHasSideSkirt(!hasSideSkirt)} />
           </HStack>
 
           {/* EXHAUST */}
           <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium" bold>
               Escapamento
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Exhaust</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Exhaust</Text>
             </Text>
             <Switch size="md" isChecked={hasExhaust} onToggle={() => setHasExhaust(!hasExhaust)} />
           </HStack>
 
           {/* ROOLCAGE */}
           <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium" bold>
               Gaiola de Prot.
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Rollcage</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Rollcage</Text>
             </Text>
             <Switch size="md" isChecked={hasRollcage} onToggle={() => setHasRollcage(!hasRollcage)} />
           </HStack>
 
           {/* ROOF */}
           <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium" bold>
               Capô
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Roof</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Roof</Text>
             </Text>
             <Switch size="md" isChecked={hasRoof} onToggle={() => setHasRoof(!hasRoof)} />
           </HStack>
 
           {/* HOOD */}
           <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium" bold>
               Teto
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Hood</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Hood</Text>
             </Text>
             <Switch size="md" isChecked={hasHood} onToggle={() => setHasHood(!hasHood)} />
           </HStack>
 
           {/* WINDOW TINT */}
           <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium" bold>
               Vidro Fumê
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Window Tint</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Window Tint</Text>
             </Text>
             <Switch size="md" isChecked={hasWindowTint} onToggle={() => setHasWindowTint(!hasWindowTint)} />
           </HStack>
 
           {/* NEONS */}
           <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium" bold>
               Neons
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Neons</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Neons</Text>
             </Text>
             <Switch size="md" isChecked={hasNeons} onToggle={() => setHasNeons(!hasNeons)} />
           </HStack>
 
           {/* XENON */}
           <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium" bold>
               Xenôn
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Xenon</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Xenon</Text>
             </Text>
             <Switch size="md" isChecked={hasXenon} onToggle={() => setHasXenon(!hasXenon)} />
           </HStack>
 
           {/* WHEELS */}
           <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium" bold>
               Roda
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Wheels</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Wheels</Text>
             </Text>
             <Switch size="md" isChecked={hasWheels} onToggle={() => setHasWheels(!hasWheels)} />
           </HStack>
 
           {/* PLATE INDEX */}
           <HStack alignItems="center" justifyContent="space-between" bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text textAlign="center" color="white" fontSize={24} fontFamily="inter" bold>
+            <Text textAlign="center" color="white" fontSize={24} fontFamily="InterMedium" bold>
               Placa
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Plate Index</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Plate Index</Text>
             </Text>
             <Switch size="md" isChecked={hasPlateIndex} onToggle={() => setHasPlateIndex(!hasPlateIndex)} />
           </HStack>
 
           {/* PAINT*/}
           <VStack bg="gray.900" py="2" px="1" pl="4" rounded="lg">
-            <Text color="white" fontSize={24} fontFamily="inter" bold>
+            <Text color="white" fontSize={24} fontFamily="InterMedium" bold>
               Pinturas
-              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Respray</Text>
+              <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Respray</Text>
             </Text>
 
             <HStack alignItems="center" justifyContent="space-between">
-              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
+              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="InterMedium" bold>
                 Primária
-                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Primary</Text>
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Primary</Text>
               </Text>
               <Switch size="md" isChecked={hasColorPrimary} onToggle={() => setHasColorPrimary(!hasColorPrimary)} />
             </HStack>
 
             <HStack alignItems="center" justifyContent="space-between">
-              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
+              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="InterMedium" bold>
                 Secundária
-                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Secondary</Text>
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Secondary</Text>
               </Text>
               <Switch size="md" isChecked={hasColorSecondary} onToggle={() => setHasColorSecondary(!hasColorSecondary)} />
             </HStack>
 
             <HStack alignItems="center" justifyContent="space-between">
-              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
+              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="InterMedium" bold>
                 Perolado
-                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Pearlescent</Text>
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Pearlescent</Text>
               </Text>
               <Switch size="md" isChecked={hasColorPearlescent} onToggle={() => setHasColorPearlescent(!hasColorPearlescent)} />
             </HStack>
 
             <HStack alignItems="center" justifyContent="space-between">
-              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
+              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="InterMedium" bold>
                 Roda
-                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Wheels</Text>
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Wheels</Text>
               </Text>
               <Switch size="md" isChecked={hasColorWheels} onToggle={() => setHasColorWheels(!hasColorWheels)} />
             </HStack>
 
             <HStack alignItems="center" justifyContent="space-between">
-              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
+              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="InterMedium" bold>
                 Interior
-                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Interior</Text>
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Interior</Text>
               </Text>
               <Switch size="md" isChecked={hasColorInterior} onToggle={() => setHasColorInterior(!hasColorInterior)} />
             </HStack>
 
             <HStack alignItems="center" justifyContent="space-between">
-              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
+              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="InterMedium" bold>
                 Painel
-                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Dashboard</Text>
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="InterMedium"> - Dashboard</Text>
               </Text>
               <Switch size="md" isChecked={hasColorDashboard} onToggle={() => setHasColorDashboard(!hasColorDashboard)} />
             </HStack>
@@ -929,12 +1003,12 @@ export default function Home() {
 
         {/* SUM AND FINISH */}
         <HStack w="90%" mt={7} mb={4} bg="gray.900" rounded="lg" alignItems="center">
-          <Text w="50%" color="gray.400" fontFamily="inter" fontSize={32} pl={4}>$ <Text color="white" fontFamily="inter" bold>{totalPrice}</Text></Text>
+          <Text w="50%" color="gray.400" fontFamily="InterMedium" fontSize={32} pl={4}>$ <Text color="white" fontFamily="InterMedium" bold>{totalPrice}</Text></Text>
           <Button w="50%" h="20" rounded="lg" onPress={onFinished} _text={{
             minW: "100%",
             textAlign: "center",
             fontSize: 28,
-            fontFamily: "inter",
+            fontFamily: "InterMedium",
             fontWeight: "800"
           }}>FINALIZAR</Button>
         </HStack>
