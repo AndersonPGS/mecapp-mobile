@@ -25,6 +25,26 @@ export default function Home() {
   const [priceShield, setPriceShield] = useState(0)
   const [priceTurbo, setPriceTurbo] = useState(0)
 
+  const [hasSpoiler, setHasSpoiler] = useState(false)
+  const [hasFrontBumper, setHasFrontBumper] = useState(false)
+  const [hasRearBumper, setHasRearBumper] = useState(false)
+  const [hasSideSkirt, setHasSideSkirt] = useState(false)
+  const [hasExhaust, setHasExhaust] = useState(false)
+  const [hasRollcage, setHasRollcage] = useState(false)
+  const [hasRoof, setHasRoof] = useState(false)
+  const [hasHood, setHasHood] = useState(false)
+  const [hasWindowTint, setHasWindowTint] = useState(false)
+  const [hasNeons, setHasNeons] = useState(false)
+  const [hasXenon, setHasXenon] = useState(false)
+  const [hasWheels, setHasWheels] = useState(false)
+  const [hasPlateIndex, setHasPlateIndex] = useState(false)
+  const [hasColorPrimary, setHasColorPrimary] = useState(false)
+  const [hasColorSecondary, setHasColorSecondary] = useState(false)
+  const [hasColorPearlescent, setHasColorPearlescent] = useState(false)
+  const [hasColorWheels, setHasColorWheels] = useState(false)
+  const [hasColorInterior, setHasColorInterior] = useState(false)
+  const [hasColorDashboard, setHasColorDashboard] = useState(false)
+
   const [totalPrice, setTotalPrice] = useState(0)
 
   useEffect(() => {
@@ -37,9 +57,85 @@ export default function Home() {
     let totalCost = costKits + costPneus
 
     if (priceFullTuning != 0) {
-      totalCost = totalCost + priceFullTuning
+      totalCost += priceFullTuning
     } else {
-      totalCost = totalCost + priceTransmission + priceSuspension + priceEngine + priceBrake + priceShield + priceTurbo
+      totalCost += priceTransmission + priceSuspension + priceEngine + priceBrake + priceShield + priceTurbo
+    }
+
+    if (hasSpoiler) {
+      totalCost += 3000
+    }
+
+    if (hasFrontBumper) {
+      totalCost += 3000
+    }
+
+    if (hasRearBumper) {
+      totalCost += 3000
+    }
+
+    if (hasSideSkirt) {
+      totalCost += 3000
+    }
+
+    if (hasExhaust) {
+      totalCost += 3000
+    }
+
+    if (hasRollcage) {
+      totalCost += 3000
+    }
+
+    if (hasRoof) {
+      totalCost += 3000
+    }
+
+    if (hasHood) {
+      totalCost += 3000
+    }
+
+    if (hasWindowTint) {
+      totalCost += 3000
+    }
+
+    if (hasNeons) {
+      totalCost += 3000
+    }
+
+    if (hasXenon) {
+      totalCost += 3000
+    }
+
+    if (hasWheels) {
+      totalCost += 8000
+    }
+
+    if (hasPlateIndex) {
+      totalCost += 3000
+    }
+
+    if (hasColorPrimary) {
+      totalCost += 3000
+    }
+
+    if (hasColorSecondary) {
+      totalCost += 3000
+    }
+
+    if (hasColorPearlescent) {
+      totalCost += 3000
+    }
+
+    if (hasColorWheels) {
+      totalCost += 3000
+    }
+
+    if (hasColorInterior) {
+      totalCost += 3000
+    }
+
+    if (hasColorDashboard) {
+      totalCost += 3000
     }
 
     setTotalPrice(totalCost)
@@ -54,7 +150,26 @@ export default function Home() {
       priceEngine,
       priceBrake,
       priceShield,
-      priceTurbo
+      priceTurbo,
+      hasSpoiler,
+      hasFrontBumper,
+      hasRearBumper,
+      hasSideSkirt,
+      hasExhaust,
+      hasRollcage,
+      hasRoof,
+      hasHood,
+      hasWindowTint,
+      hasNeons,
+      hasXenon,
+      hasWheels,
+      hasPlateIndex,
+      hasColorPrimary,
+      hasColorSecondary,
+      hasColorPearlescent,
+      hasColorWheels,
+      hasColorInterior,
+      hasColorDashboard
     ]
   )
 
@@ -84,16 +199,6 @@ export default function Home() {
 
   function increasePneus() {
     setCountPneus((countPneus) => countPneus + 1)
-  }
-
-  function changeIsPartner(value: boolean) {
-    if (value) {
-      setIsPartner(true)
-    } else {
-      setIsPartner(false)
-    }
-
-    console.log(isPartner)
   }
 
   function selectionFullTuning(value: string) {
@@ -386,7 +491,7 @@ export default function Home() {
         </HStack>
         <HStack w="80%" alignItems="center" justifyContent="space-between">
           <Text textAlign="center" color="white" fontSize={24} fontFamily="inter">Parceria</Text>
-          <Switch size="md" onToggle={(state) => changeIsPartner(state)} />
+          <Switch size="md" isChecked={isPartner} onToggle={() => setIsPartner(!isPartner)} />
         </HStack>
 
         {/* SELECTS FROM PERFORMANCE */}
@@ -611,7 +716,7 @@ export default function Home() {
               Aerofólio
               <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Spoiler</Text>
             </Text>
-            <Switch size="md" />
+            <Switch size="md" isChecked={hasSpoiler} onToggle={() => setHasSpoiler(!hasSpoiler)} />
           </HStack>
 
           {/* FRONT BUMPER */}
@@ -620,7 +725,7 @@ export default function Home() {
               Parachoque Diant.
               <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Front Bumper</Text>
             </Text>
-            <Switch size="md" />
+            <Switch size="md" isChecked={hasFrontBumper} onToggle={() => setHasFrontBumper(!hasFrontBumper)} />
           </HStack>
 
           {/* REAR BUMPER */}
@@ -629,7 +734,7 @@ export default function Home() {
               Parachoque Tras.
               <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Rear Bumper</Text>
             </Text>
-            <Switch size="md" />
+            <Switch size="md" isChecked={hasRearBumper} onToggle={() => setHasRearBumper(!hasRearBumper)} />
           </HStack>
 
           {/* SIDE SKIRT */}
@@ -638,7 +743,7 @@ export default function Home() {
               Saia Lateral
               <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Side Skirt</Text>
             </Text>
-            <Switch size="md" />
+            <Switch size="md" isChecked={hasSideSkirt} onToggle={() => setHasSideSkirt(!hasSideSkirt)} />
           </HStack>
 
           {/* EXHAUST */}
@@ -647,7 +752,7 @@ export default function Home() {
               Escapamento
               <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Exhaust</Text>
             </Text>
-            <Switch size="md" />
+            <Switch size="md" isChecked={hasExhaust} onToggle={() => setHasExhaust(!hasExhaust)} />
           </HStack>
 
           {/* ROOLCAGE */}
@@ -656,7 +761,7 @@ export default function Home() {
               Gaiola de Prot.
               <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Rollcage</Text>
             </Text>
-            <Switch size="md" />
+            <Switch size="md" isChecked={hasRollcage} onToggle={() => setHasRollcage(!hasRollcage)} />
           </HStack>
 
           {/* ROOF */}
@@ -665,7 +770,7 @@ export default function Home() {
               Capô
               <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Roof</Text>
             </Text>
-            <Switch size="md" />
+            <Switch size="md" isChecked={hasRoof} onToggle={() => setHasRoof(!hasRoof)} />
           </HStack>
 
           {/* HOOD */}
@@ -674,7 +779,7 @@ export default function Home() {
               Teto
               <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Hood</Text>
             </Text>
-            <Switch size="md" />
+            <Switch size="md" isChecked={hasHood} onToggle={() => setHasHood(!hasHood)} />
           </HStack>
 
           {/* WINDOW TINT */}
@@ -683,7 +788,7 @@ export default function Home() {
               Vidro Fumê
               <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Window Tint</Text>
             </Text>
-            <Switch size="md" />
+            <Switch size="md" isChecked={hasWindowTint} onToggle={() => setHasWindowTint(!hasWindowTint)} />
           </HStack>
 
           {/* NEONS */}
@@ -692,7 +797,7 @@ export default function Home() {
               Neons
               <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Neons</Text>
             </Text>
-            <Switch size="md" />
+            <Switch size="md" isChecked={hasNeons} onToggle={() => setHasNeons(!hasNeons)} />
           </HStack>
 
           {/* XENON */}
@@ -701,7 +806,7 @@ export default function Home() {
               Xenôn
               <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Xenon</Text>
             </Text>
-            <Switch size="md" />
+            <Switch size="md" isChecked={hasXenon} onToggle={() => setHasXenon(!hasXenon)} />
           </HStack>
 
           {/* WHEELS */}
@@ -710,7 +815,7 @@ export default function Home() {
               Roda
               <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Wheels</Text>
             </Text>
-            <Switch size="md" />
+            <Switch size="md" isChecked={hasWheels} onToggle={() => setHasWheels(!hasWheels)} />
           </HStack>
 
           {/* PLATE INDEX */}
@@ -719,7 +824,7 @@ export default function Home() {
               Placa
               <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Plate Index</Text>
             </Text>
-            <Switch size="md" />
+            <Switch size="md" isChecked={hasPlateIndex} onToggle={() => setHasPlateIndex(!hasPlateIndex)} />
           </HStack>
 
           {/* PAINT*/}
@@ -734,7 +839,7 @@ export default function Home() {
                 Primária
                 <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Primary</Text>
               </Text>
-              <Switch size="md" />
+              <Switch size="md" isChecked={hasColorPrimary} onToggle={() => setHasColorPrimary(!hasColorPrimary)} />
             </HStack>
 
             <HStack alignItems="center" justifyContent="space-between">
@@ -742,23 +847,39 @@ export default function Home() {
                 Secundária
                 <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Secondary</Text>
               </Text>
-              <Switch size="md" />
+              <Switch size="md" isChecked={hasColorSecondary} onToggle={() => setHasColorSecondary(!hasColorSecondary)} />
             </HStack>
 
             <HStack alignItems="center" justifyContent="space-between">
               <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
                 Perolado
-                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Pearlyment</Text>
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Pearlescent</Text>
               </Text>
-              <Switch size="md" />
+              <Switch size="md" isChecked={hasColorPearlescent} onToggle={() => setHasColorPearlescent(!hasColorPearlescent)} />
             </HStack>
 
             <HStack alignItems="center" justifyContent="space-between">
               <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
-                Cor da roda
-                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Wheels Color</Text>
+                Roda
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Wheels</Text>
               </Text>
-              <Switch size="md" />
+              <Switch size="md" isChecked={hasColorWheels} onToggle={() => setHasColorWheels(!hasColorWheels)} />
+            </HStack>
+
+            <HStack alignItems="center" justifyContent="space-between">
+              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
+                Interior
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Interior</Text>
+              </Text>
+              <Switch size="md" isChecked={hasColorInterior} onToggle={() => setHasColorInterior(!hasColorInterior)} />
+            </HStack>
+
+            <HStack alignItems="center" justifyContent="space-between">
+              <Text pl={4} textAlign="center" color="white" fontSize={22} fontFamily="inter" bold>
+                Painel
+                <Text textAlign="center" color="gray.400" fontSize={20} fontFamily="inter"> - Dashboard</Text>
+              </Text>
+              <Switch size="md" isChecked={hasColorDashboard} onToggle={() => setHasColorDashboard(!hasColorDashboard)} />
             </HStack>
 
           </VStack>
