@@ -928,8 +928,8 @@ export default function Home() {
         </VStack>
 
         {/* SUM AND FINISH */}
-        <HStack w="90%" mt={7} mb={2} bg="gray.900" rounded="lg" alignItems="center">
-          <Text w="50%" color="gray.400" fontFamily="inter" fontSize={30} pl={4}>$ <Text color="white" fontFamily="inter" bold>{totalPrice}</Text></Text>
+        <HStack w="90%" mt={7} mb={4} bg="gray.900" rounded="lg" alignItems="center">
+          <Text w="50%" color="gray.400" fontFamily="inter" fontSize={32} pl={4}>$ <Text color="white" fontFamily="inter" bold>{totalPrice}</Text></Text>
           <Button w="50%" h="20" rounded="lg" onPress={onFinished} _text={{
             minW: "100%",
             textAlign: "center",
