@@ -177,8 +177,45 @@ export default function Home() {
     setSelledKits((selledKits) => selledKits + countKits)
     setSelledPneus((selledPneus) => selledPneus + countPneus)
 
+    setIsPartner(false)
     setCountKits(0)
     setCountPneus(0)
+
+    setValueFullTuning("0")
+    setValueTransmission("0")
+    setValueSuspension("0")
+    setValueEngine("0")
+    setValueBrake("0")
+    setValueShield("0")
+    setValueTurbo("0")
+
+    setPriceFullTuning(0)
+    setPriceTransmission(0)
+    setPriceSuspension(0)
+    setPriceEngine(0)
+    setPriceBrake(0)
+    setPriceShield(0)
+    setPriceTurbo(0)
+
+    setHasSpoiler(false)
+    setHasFrontBumper(false)
+    setHasRearBumper(false)
+    setHasSideSkirt(false)
+    setHasExhaust(false)
+    setHasRollcage(false)
+    setHasRoof(false)
+    setHasHood(false)
+    setHasWindowTint(false)
+    setHasNeons(false)
+    setHasXenon(false)
+    setHasWheels(false)
+    setHasPlateIndex(false)
+    setHasColorPrimary(false)
+    setHasColorSecondary(false)
+    setHasColorPearlescent(false)
+    setHasColorWheels(false)
+    setHasColorInterior(false)
+    setHasColorDashboard(false)
   }
 
   function decreaseKits() {
@@ -457,16 +494,20 @@ export default function Home() {
       <Center w="full" bg="black" safeArea>
 
         {/* TOTAL KITS AND PNEUS SELLED */}
-        <HStack minW="300" w="90%" my={5} p={5} bg="gray.900" rounded="2xl">
-          <Center height="130" m={4} flex={.5}>
-            <Text fontSize="100" fontFamily="inter" color="white" w="full" textAlign="center" bold>{selledKits}</Text>
-            <Text fontSize="30" fontFamily="inter" color="gray.400" w="full" textAlign="center">KITS</Text>
-          </Center>
-          <Center height="130" m={4} flex={.5}>
-            <Text fontSize="100" fontFamily="inter" color="white" w="full" textAlign="center" bold >{selledPneus}</Text>
-            <Text fontSize="30" fontFamily="inter" color="gray.400" w="full" textAlign="center">PNEUS</Text>
-          </Center>
-        </HStack>
+        <VStack minW="300" w="90%" my={5} p={5} bg="gray.900" rounded="2xl">
+          <Text w="full" textAlign="center" color="gray.400" fontSize={24} fontFamily="inter" bold>VENDIDOS HOJE</Text>
+          <HStack >
+            <Center height="130" m={4} flex={.5}>
+              <Text fontSize="100" fontFamily="inter" color="white" w="full" textAlign="center" bold>{selledKits}</Text>
+              <Text fontSize="30" fontFamily="inter" color="gray.400" w="full" textAlign="center">KITS</Text>
+            </Center>
+            <Text fontSize="100" fontFamily="inter" color="gray.800" textAlign="center">|</Text>
+            <Center height="130" m={4} flex={.5}>
+              <Text fontSize="100" fontFamily="inter" color="white" w="full" textAlign="center" bold >{selledPneus}</Text>
+              <Text fontSize="30" fontFamily="inter" color="gray.400" w="full" textAlign="center">PNEUS</Text>
+            </Center>
+          </HStack>
+        </VStack>
 
         {/* KITS AND PNEUS TO SELL */}
         <Text w="full" mt={7} textAlign="center" color="gray.400" fontSize={24} fontFamily="inter" bold>KITS & PNEUS</Text>
@@ -889,7 +930,7 @@ export default function Home() {
         {/* SUM AND FINISH */}
         <HStack w="90%" mt={7} mb={2} bg="gray.900" rounded="lg" alignItems="center">
           <Text w="50%" color="gray.400" fontFamily="inter" fontSize={30} pl={4}>$ <Text color="white" fontFamily="inter" bold>{totalPrice}</Text></Text>
-          <Button w="50%" h="20" colorScheme="green" rounded="lg" onPress={onFinished} _text={{
+          <Button w="50%" h="20" rounded="lg" onPress={onFinished} _text={{
             minW: "100%",
             textAlign: "center",
             fontSize: 28,
